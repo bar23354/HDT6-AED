@@ -27,8 +27,12 @@ public class Utilidades {
     /** 
      * @return int
      */
-    public static int leerEntero() {
-        return Integer.parseInt(scanner.nextLine());
+    public static int leerEntero() throws NumberFormatException {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("\nError, ingrese un número válido");
+        }
     }
 
     /** 
