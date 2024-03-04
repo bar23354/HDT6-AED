@@ -15,14 +15,12 @@ public class Main {
 
         // Leer el archivo y crear el mazo
         LectorArchivo lector = new LectorArchivo();
-        Map<String, String> cartas = lector.leerArchivo("cards_desc.txt");
-        Mazo mazo = new Mazo(mapa);
-        for (Map.Entry<String, String> entry : cartas.entrySet()) {
-            mazo.agregarCarta(new Carta(entry.getKey(), entry.getValue(), 1));
-        }
+        Map<String, String> cartasSistema = lector.leerArchivo("cards_desc.txt");
+        Mazo mazoUsuario = new Mazo(mapa);
 
         // Crear una instancia de InterfazGrafica y pasar el mazo
-        InterfazGrafica interfaz = new InterfazGrafica(mazo);
-        interfaz.mostrarMenu();
+        InterfazGrafica interfaz = new InterfazGrafica(mazoUsuario);
+        interfaz.mostrarMenu(cartasSistema);
     }
 }
+

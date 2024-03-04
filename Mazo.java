@@ -4,11 +4,9 @@
  * Nadissa Vela 23764 | Roberto Barreda 23354
   */
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Mazo extends HashMap<String, Carta> {
     private Map<String, Carta> cartas;
@@ -51,13 +49,18 @@ public class Mazo extends HashMap<String, Carta> {
     }
 
     public void mostrarTodasLasCartas() {
+        int c = 0;
         for (Carta carta : cartas.values()) {
+            c++;
             System.out.println(carta);
+        }
+        if(c == 0){
+            System.out.println("\nAún no hay cartas en la colección");
         }
     }
 
     public void mostrarCartasPorTipo() {
-        Map<String, Integer> cartasPorTipo = new HashMap<>();
+        Map<String, Integer> cartasPorTipo = new TreeMap<>();
         for (Carta carta : cartas.values()) {
             cartasPorTipo.put(carta.getTipo(), cartasPorTipo.getOrDefault(carta.getTipo(), 0) + 1);
         }

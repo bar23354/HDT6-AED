@@ -1,8 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class InterfazGrafica {
 
@@ -12,7 +9,7 @@ public class InterfazGrafica {
         this.mazo = mazo;
     }
 
-    public void mostrarMenu() {
+    public void mostrarMenu(Map<String, String> cartasSistema) {
         int option = 0;
 
         while (option != 7) {
@@ -34,10 +31,10 @@ public class InterfazGrafica {
 
             switch (option) {
                 case 1:
-                    agregarCarta();
+                    agregarCarta(cartasSistema);
                     break;
                 case 2:
-                    mostrarTipoCarta();
+                    mostrarTipoCarta(cartasSistema);
                     break;
                 case 3:
                     mazo.mostrarTodasLasCartas();
@@ -46,10 +43,10 @@ public class InterfazGrafica {
                     mazo.mostrarCartasPorTipo();
                     break;
                 case 5:
-                    mostrarTodasLasCartasDisponibles();
+                    mostrarTodasLasCartasDisponibles(cartasSistema);
                     break;
                 case 6:
-                    mostrarTodasLasCartasDisponiblesOrdenadasPorTipo();
+                    mostrarTodasLasCartasDisponiblesOrdenadasPorTipo(cartasSistema);
                     break;
                 case 7:
                     System.out.println("\n¡Hasta luego!");
@@ -61,33 +58,57 @@ public class InterfazGrafica {
         }
     }
 
-    private void agregarCarta() {
+    private void agregarCarta(Map<String, String> cartasSistema) {
         System.out.print("\nIngrese el nombre de la carta que desea agregar: ");
         String nombreCarta = Utilidades.leerEntrada();
-        System.out.println("\nIngrese el tipo de la carta (monstruo, trampa, hechizo): ");
+        System.out.println("\nIngrese el tipo de la carta (Monstruo, Trampa, Hechizo): ");
         String tipoCarta = Utilidades.leerEntrada();
-        Carta carta = new Carta(nombreCarta, tipoCarta, 1);
-        mazo.agregarCarta(carta);
-        System.out.println("\n\n¡Carta agregada a la colección!");
+
+        if (cartasSistema.containsKey(nombreCarta)) {
+            Carta carta = new Carta(nombreCarta, tipoCarta, 1);
+            mazo.agregarCarta(carta);
+            System.out.println("\n\n¡Carta agregada a la colección!");
+        } else {
+            System.out.println("\nLa carta " + nombreCarta + " no se encuentra en el sistema.");
+        }
     }
 
-    private void mostrarTipoCarta() {
+    private void mostrarTipoCarta(Map<String, String> cartasSistema) {
         System.out.print("\nIngrese el nombre de la carta: ");
         String nombreCarta = Utilidades.leerEntrada();
-        Carta carta = mazo.buscarCarta(nombreCarta);
-        if (carta != null) {
-            System.out.println("\nLa carta '" + nombreCarta + "' es de tipo: " + carta.getTipo());
+       
+        if (cartasSistema.containsKey(nombreCarta)) {
+            System.out.println("\nLa carta '" + nombreCarta + "' es de tipo: " + cartasSistema.get(nombreCarta));
         } else {
-            System.out.println("\nLa carta '" + nombreCarta + "' no se encuentra en la colección.");
+            System.out.println("\nLa carta '" + nombreCarta + "' no se encuentra en las cartas del sistema.");
         }
     }
 
-        private void mostrarTodasLasCartasDisponibles() {
-            mazo.mostrarTodasLasCartas();
+    private void mostrarTodasLasCartasDisponibles(Map<String, String> cartasSistema) {
+        for (Map.Entry<String, String> entry : cartasSistema.entrySet()) {
+            System.out.println("\nNombre de la carta: " + entry.getKey() + ", Tipo: " + entry.getValue());
         }
+    }
 
-        private void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo() {
-            mazo.mostrarCartasPorTipo();;
+    private void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo(Map<String, String> cartasSistema) {
+        Map<String, Integer> cartasPorTipo = new HashMap<>();
+        for (Map.Entry<String, String> entry : cartasSistema.entrySet()) {;
+            cartasPorTipo.put(entry.getValue(), cartasPorTipo.getOrDefault(entry.getValue(), 0) + 1);
         }
+        for (Map.Entry<String, Integer> entry : cartasPorTipo.entrySet()) {
+            String tipoCarta = entry.getKey();
+            
+            System.out.println("Tipo de carta: " + tipoCarta);
+            System.out.println("Cantidad total: " + entry.getValue());
+            
+            System.out.println("Nombres de las cartas correspondientes:");
+            for (Map.Entry<String, String> carta : cartasSistema.entrySet()) {
+                if (carta.getValue().equals(tipoCarta)) {
+                    System.out.println("- " + carta.getKey());
+                }
+            }
+            System.out.println(); 
+        }
+    }
 
 }
