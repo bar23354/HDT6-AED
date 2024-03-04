@@ -4,24 +4,25 @@
  * Nadissa Vela 23764 | Roberto Barreda 23354
   */
 
-import java.util.HashMap;
+  import java.util.Map;
 
 public class Main {
-  public static void main(String[] args) {
-    LectorArchivo lector = new LectorArchivo();
-    HashMap<String, String> cartas = lector.leerArchivo("nombre_del_archivo.txt");
-    seleccionaImplementacionMap();
-    muestraMenu(cartas);
+    public static void main(String[] args) {
+        // Seleccionar la implementación del mapa
+        System.out.print("\nIngrese el tipo de mapa a utilizar (HashMap, TreeMap, LinkedHashMap): ");
+        String tipoMapa = Utilidades.leerEntrada();; 
+        Map<String, Carta> mapa = FabricaMapas.crearMapa(tipoMapa);
 
-  }
+        // Leer el archivo y crear el mazo
+        LectorArchivo lector = new LectorArchivo();
+        Map<String, String> cartas = lector.leerArchivo("cards_desc.txt");
+        Mazo mazo = new Mazo(mapa);
+        for (Map.Entry<String, String> entry : cartas.entrySet()) {
+            mazo.agregarCarta(new Carta(entry.getKey(), entry.getValue(), 1));
+        }
 
-  public static void seleccionaImplementacionMap() {
-    InterfazGrafica inter = new InterfazGrafica();
-    inter.mostrarMenu();
-  }
-
-  public static void muestraMenu(HashMap<String, String> cartas) {
-
-  }
-
+        // Crear una instancia de InterfazGrafica y pasar el mazo
+        InterfazGrafica interfaz = new InterfazGrafica(mazo);
+        interfaz.mostrarMenu();
+    }
 }

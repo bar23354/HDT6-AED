@@ -82,33 +82,12 @@ public class InterfazGrafica {
         }
     }
 
-    private void mostrarTodasLasCartasDisponibles() {
-        System.out.println("\nTodas las cartas de la colección");
-        for (Map.Entry<String, String> entry : cartas.entrySet()) {
-            System.out.println("Nombre: " + entry.getKey() + ", Tipo: " + entry.getValue());
-        }
-    }
-
-    private void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo() {
-        System.out.println("--- Todas las cartas disponibles ordenadas por tipo ---");
-
-        Map<String, List<String>> cartasPorTipo = new HashMap<>();
-        for (Map.Entry<String, String> entry : cartas.entrySet()) {
-            String tipo = entry.getValue();
-            String nombre = entry.getKey();
-            cartasPorTipo.putIfAbsent(tipo, new ArrayList<>());
-            cartasPorTipo.get(tipo).add(nombre);
+        private void mostrarTodasLasCartasDisponibles() {
+            mazo.mostrarTodasLasCartas();
         }
 
-        // Ordenar las listas por tipo
-        cartasPorTipo.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEachOrdered(e -> {
-                    System.out.println("Tipo: " + e.getKey());
-                    for (String nombre : e.getValue()) {
-                        System.out.println("- " + nombre);
-                    }
-                });
-    }
+        private void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo() {
+            mazo.mostrarCartasPorTipo();;
+        }
 
 }

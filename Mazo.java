@@ -4,24 +4,29 @@
  * Nadissa Vela 23764 | Roberto Barreda 23354
   */
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Mazo extends HashMap<String, Carta> {
+    private Map<String, Carta> cartas;
 
-    public Mazo() {
-        super();
+    public Mazo(Map<String, Carta> cartas) {
+        this.cartas = cartas;
     }
+    
     
     /** 
      * @param carta
      */
     public void agregarCarta(Carta carta) {
-        if (containsKey(carta.getNombre())) {
-            Carta cartaExistente = get(carta.getNombre());
+        if (cartas.containsKey(carta.getNombre())) {
+            Carta cartaExistente = cartas.get(carta.getNombre());
             cartaExistente.setCantidad(cartaExistente.getCantidad() + 1);
         } else {
-            put(carta.getNombre(), carta);
+            cartas.put(carta.getNombre(), carta);
         }
     }
     
@@ -29,8 +34,8 @@ public class Mazo extends HashMap<String, Carta> {
      * @param nombreCarta
      */
     public void eliminarCarta(String nombreCarta) {
-        if (containsKey(nombreCarta)) {
-            remove(nombreCarta);
+        if (cartas.containsKey(nombreCarta)) {
+            cartas.remove(nombreCarta);
         } else {
             System.out.println("La carta " + nombreCarta + " no se encuentra en el mazo.");
         }
@@ -42,22 +47,18 @@ public class Mazo extends HashMap<String, Carta> {
      * @return Carta
      */
     public Carta buscarCarta(String nombreCarta) {
-        if (containsKey(nombreCarta)) {
-            return get(nombreCarta);
-        } else {
-            return null;
-        }
+        return cartas.get(nombreCarta);
     }
 
     public void mostrarTodasLasCartas() {
-        for (Carta carta : values()) {
+        for (Carta carta : cartas.values()) {
             System.out.println(carta);
         }
     }
 
     public void mostrarCartasPorTipo() {
         Map<String, Integer> cartasPorTipo = new HashMap<>();
-        for (Carta carta : values()) {
+        for (Carta carta : cartas.values()) {
             cartasPorTipo.put(carta.getTipo(), cartasPorTipo.getOrDefault(carta.getTipo(), 0) + 1);
         }
         for (Map.Entry<String, Integer> entry : cartasPorTipo.entrySet()) {
@@ -65,4 +66,39 @@ public class Mazo extends HashMap<String, Carta> {
         }
     }
 
+    //por si acaso
+    // public void mostrarTodasLasCartasDisponibles() {
+    //     System.out.println("\nTodas las cartas de la colección:");
+    //     for (Carta carta : cartas.values()) {
+    //         System.out.println("Nombre: " + carta.getNombre() + ", Tipo: " + carta.getTipo());
+    //     }
+    // }
+
+    // public void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo() {
+    //     Map<String, List<String>> cartasPorTipo = new HashMap<>();
+
+    //     // Agrupar cartas por tipo
+    //     for (Carta carta : cartas.values()) {
+    //         String tipo = carta.getTipo();
+    //         String nombre = carta.getNombre();
+    //         cartasPorTipo.putIfAbsent(tipo, new ArrayList<>());
+    //         cartasPorTipo.get(tipo).add(nombre);
+    //     }
+
+    //     // Ordenar las listas de cartas por tipo
+    //     for (List<String> lista : cartasPorTipo.values()) {
+    //         Collections.sort(lista);
+    //     }
+
+    //     // Mostrar cartas ordenadas por tipo
+    //     System.out.println("\nTodas las cartas disponibles ordenadas por tipo:");
+    //     for (Map.Entry<String, List<String>> entry : cartasPorTipo.entrySet()) {
+    //         String tipo = entry.getKey();
+    //         List<String> lista = entry.getValue();
+    //         System.out.println("Tipo: " + tipo);
+    //         for (String nombre : lista) {
+    //             System.out.println("- " + nombre);
+    //         }
+    //     }
+    // }
 }
