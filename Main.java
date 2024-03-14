@@ -2,15 +2,22 @@
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos - seccion 40
  * Nadissa Vela 23764 | Roberto Barreda 23354
-  */
+ * 
+ * Clase principal del programa
+*/
 
-  import java.util.Map;
+import java.util.Map;
 
 public class Main {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         // Seleccionar la implementación del mapa
         System.out.print("\nIngrese el tipo de mapa a utilizar (HashMap, TreeMap, LinkedHashMap): ");
-        String tipoMapa = Utilidades.leerEntrada();; 
+        String tipoMapa = Utilidades.leerEntrada();
+        ;
         Map<String, Carta> mapa = FabricaMapas.crearMapa(tipoMapa);
 
         // Leer el archivo y crear el mazo
@@ -23,4 +30,3 @@ public class Main {
         interfaz.mostrarMenu(cartasSistema);
     }
 }
-

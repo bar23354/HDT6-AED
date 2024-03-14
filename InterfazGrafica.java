@@ -1,3 +1,12 @@
+/*
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos - seccion 40
+ * Nadissa Vela 23764 | Roberto Barreda 23354
+ * 
+ * Esta clase se utiliza para modelar la interfaz con la que el usuario interactua 
+ * para utilizar el sistema
+*/
+  
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +18,11 @@ public class InterfazGrafica {
         this.mazo = mazo;
     }
 
+    
+    /** 
+     * @param cartasSistema
+     * menú principal del sistema
+     */
     public void mostrarMenu(Map<String, String> cartasSistema) {
         int option = 0;
 
@@ -58,12 +72,16 @@ public class InterfazGrafica {
         }
     }
 
+    
+    /** 
+     * @param cartasSistema
+     */
     private void agregarCarta(Map<String, String> cartasSistema) {
         System.out.print("\nIngrese el nombre de la carta que desea agregar: ");
         String nombreCarta = Utilidades.leerEntrada();
         System.out.println("\nIngrese el tipo de la carta (Monstruo, Trampa, Hechizo): ");
         String tipoCarta = Utilidades.leerEntrada();
-
+        //verificar que sí existe la carta en el mazo del sistema
         if (cartasSistema.containsKey(nombreCarta)) {
             Carta carta = new Carta(nombreCarta, tipoCarta, 1);
             mazo.agregarCarta(carta);
@@ -73,10 +91,15 @@ public class InterfazGrafica {
         }
     }
 
+    
+    /** 
+     * @param cartasSistema
+     * muestra el tipo de una carta, se verifica con el mazo de cartas del sistema
+     */
     private void mostrarTipoCarta(Map<String, String> cartasSistema) {
         System.out.print("\nIngrese el nombre de la carta: ");
         String nombreCarta = Utilidades.leerEntrada();
-       
+       //verificamos si la carta existe
         if (cartasSistema.containsKey(nombreCarta)) {
             System.out.println("\nLa carta '" + nombreCarta + "' es de tipo: " + cartasSistema.get(nombreCarta));
         } else {
@@ -84,12 +107,20 @@ public class InterfazGrafica {
         }
     }
 
+    
+    /** 
+     * @param cartasSistema
+     */
     private void mostrarTodasLasCartasDisponibles(Map<String, String> cartasSistema) {
         for (Map.Entry<String, String> entry : cartasSistema.entrySet()) {
             System.out.println("\nNombre de la carta: " + entry.getKey() + ", Tipo: " + entry.getValue());
         }
     }
 
+    
+    /** 
+     * @param cartasSistema
+     */
     private void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo(Map<String, String> cartasSistema) {
         Map<String, Integer> cartasPorTipo = new HashMap<>();
         for (Map.Entry<String, String> entry : cartasSistema.entrySet()) {;

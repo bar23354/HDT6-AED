@@ -2,7 +2,9 @@
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos - seccion 40
  * Nadissa Vela 23764 | Roberto Barreda 23354
-  */
+ * 
+ * Clase que ejecuta instrucciones básicas en consola
+*/
 
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ public class Utilidades {
 
     /** 
      * @param mensaje
+     * metodo para mostrar un mensaje en consola
      */
     public static void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
@@ -19,6 +22,7 @@ public class Utilidades {
     
     /** 
      * @return String
+     * leer input del usuario
      */
     public static String leerEntrada() {
         return scanner.nextLine();
@@ -26,6 +30,7 @@ public class Utilidades {
     
     /** 
      * @return int
+     * leer input entero del usuario
      */
     public static int leerEntero() throws NumberFormatException {
         try {
@@ -38,6 +43,7 @@ public class Utilidades {
     /** 
      * @param entrada
      * @return boolean
+     * validar input booleano
      */
     public static boolean validarEntradaSiNo(String entrada) {
         return entrada.equalsIgnoreCase("si") || entrada.equalsIgnoreCase("no");

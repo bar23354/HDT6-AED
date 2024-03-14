@@ -2,7 +2,9 @@
  * Universidad del Valle de Guatemala
  * Algoritmos y Estructuras de Datos - seccion 40
  * Nadissa Vela 23764 | Roberto Barreda 23354
-  */
+ * 
+ * Clase que funciona como modelo de un mazo de cartas
+*/
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +16,8 @@ public class Mazo extends HashMap<String, Carta> {
     public Mazo(Map<String, Carta> cartas) {
         this.cartas = cartas;
     }
-    
-    
-    /** 
+
+    /**
      * @param carta
      */
     public void agregarCarta(Carta carta) {
@@ -27,8 +28,8 @@ public class Mazo extends HashMap<String, Carta> {
             cartas.put(carta.getNombre(), carta);
         }
     }
-    
-    /** 
+
+    /**
      * @param nombreCarta
      */
     public void eliminarCarta(String nombreCarta) {
@@ -39,8 +40,7 @@ public class Mazo extends HashMap<String, Carta> {
         }
     }
 
-    
-    /** 
+    /**
      * @param nombreCarta
      * @return Carta
      */
@@ -54,7 +54,7 @@ public class Mazo extends HashMap<String, Carta> {
             c++;
             System.out.println(carta);
         }
-        if(c == 0){
+        if (c == 0) {
             System.out.println("\nAún no hay cartas en la colección");
         }
     }
@@ -69,39 +69,4 @@ public class Mazo extends HashMap<String, Carta> {
         }
     }
 
-    //por si acaso
-    // public void mostrarTodasLasCartasDisponibles() {
-    //     System.out.println("\nTodas las cartas de la colección:");
-    //     for (Carta carta : cartas.values()) {
-    //         System.out.println("Nombre: " + carta.getNombre() + ", Tipo: " + carta.getTipo());
-    //     }
-    // }
-
-    // public void mostrarTodasLasCartasDisponiblesOrdenadasPorTipo() {
-    //     Map<String, List<String>> cartasPorTipo = new HashMap<>();
-
-    //     // Agrupar cartas por tipo
-    //     for (Carta carta : cartas.values()) {
-    //         String tipo = carta.getTipo();
-    //         String nombre = carta.getNombre();
-    //         cartasPorTipo.putIfAbsent(tipo, new ArrayList<>());
-    //         cartasPorTipo.get(tipo).add(nombre);
-    //     }
-
-    //     // Ordenar las listas de cartas por tipo
-    //     for (List<String> lista : cartasPorTipo.values()) {
-    //         Collections.sort(lista);
-    //     }
-
-    //     // Mostrar cartas ordenadas por tipo
-    //     System.out.println("\nTodas las cartas disponibles ordenadas por tipo:");
-    //     for (Map.Entry<String, List<String>> entry : cartasPorTipo.entrySet()) {
-    //         String tipo = entry.getKey();
-    //         List<String> lista = entry.getValue();
-    //         System.out.println("Tipo: " + tipo);
-    //         for (String nombre : lista) {
-    //             System.out.println("- " + nombre);
-    //         }
-    //     }
-    // }
 }
